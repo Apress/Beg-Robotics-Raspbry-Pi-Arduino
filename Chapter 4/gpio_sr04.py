@@ -42,4 +42,4 @@ while True:
     distance = round(distance, 2)
 
     # Display the results. end = '\r' forces the output to the same line
-    print("Distance: " + str(distance) + "cm      ", end = '\r')
+    print("Distance: " + str(distance) + "cm      ", end = '\n')
