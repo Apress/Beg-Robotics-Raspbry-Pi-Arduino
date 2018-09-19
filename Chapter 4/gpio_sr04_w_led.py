@@ -11,17 +11,20 @@ GPIO.setwarnings(False)
 # Define pins
 trig = 20
 echo = 21
+led = 16
 
 GPIO.setup(trig,GPIO.OUT)
 GPIO.setup(echo,GPIO.IN)
+GPIO.setup(led, GPIO.OUT)
+
+GPIO.output(led, False)
 
 print("Measuring distance")
-
 # Begin while loop
 while True:
     # Set trigger pin low got 1/10 second
     GPIO.output(trig,False)
-    time.sleep(0.1)
+    time.sleep(0.05)
 
     # Send a 10uS pulse
     GPIO.output(trig,True)
@@ -40,6 +43,15 @@ while True:
     # Calculate the distance in centimeters
     distance = pulse_duration * 17150
     distance = round(distance, 2)
+    
+    
+    if distance < 20.0:
+        GPIO.output(led, True)
+    else:
+       GPIO.output(led, False) 
+        
+    
 
     # Display the results. end = '\r' forces the output to the same line
     print("Distance: " + str(distance) + "cm      ", end = '\n')
+
